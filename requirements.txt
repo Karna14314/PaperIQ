@@ -1,0 +1,22 @@
+# PaperIQ - Research Paper Insight Analyzer
+# Milestone 1 Dependencies
+
+# Core PDF Processing
+PyMuPDF>=1.23.0
+pdfplumber>=0.10.0
+camelot-py[cv]>=0.11.0
+
+# Image Processing
+Pillow>=10.0.0
+opencv-python-headless>=4.8.0
+
+# Web Interface
+streamlit>=1.29.0
+
+# Data Handling
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Utilities
+python-dotenv>=1.0.0
+tqdm>=4.66.0
