@@ -1,57 +1,47 @@
 # PaperIQ - Research Paper Insight Analyzer
 
-**Milestone 1: Paper Upload & Parsing**
+**Milestone 1: Paper Upload and Parsing**
 
 PaperIQ is a pure Python application that extracts and analyzes research papers. Upload a PDF and get automatic section identification, image extraction, and table detection with confidence scoring.
 
-## 🚀 Features
+## Features
 
-- **📤 PDF Upload** - Upload research papers through a web interface
-- **📝 Section Detection** - Automatically identify:
-  - Abstract
-  - Introduction
-  - Methodology/Methods
-  - Results/Experiments
-  - Discussion
-  - Conclusion
-  - References
-- **🖼️ Image Extraction** - Extract all figures and diagrams with metadata
-- **📊 Table Extraction** - Extract tables and convert to CSV format
-- **✅ Quality Validation** - Confidence scores and validation reports
-- **💾 Persistent Storage** - SQLite database for data persistence
+- **PDF Upload** - Upload research papers through a web interface
+- **Section Detection** - Automatically identify Abstract, Introduction, Methodology, Results, Discussion, Conclusion, and References
+- **Image Extraction** - Extract all figures and diagrams with metadata
+- **Table Extraction** - Extract tables and convert to CSV format
+- **Quality Validation** - Confidence scores and validation reports
+- **Persistent Storage** - SQLite database for data persistence
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.9+
 - pip
 
-## 🛠️ Installation
+## Installation
 
-1. **Clone or navigate to the project:**
+1. Clone or navigate to the project:
    ```bash
    cd /path/to/PaperIQ
    ```
 
-2. **Create a virtual environment (recommended):**
+2. Create a virtual environment:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
-3. **Install dependencies:**
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Copy environment configuration (optional):**
+4. Copy environment configuration (optional):
    ```bash
    cp .env.example .env
-   # Edit .env to customize settings
    ```
 
-## 🏃 Running the Application
-
-Start the Streamlit app:
+## Running the Application
 
 ```bash
 streamlit run app/main.py
@@ -59,60 +49,55 @@ streamlit run app/main.py
 
 The app will open in your browser at `http://localhost:8501`
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 paperiq/
-├── requirements.txt          # Python dependencies
-├── .env.example             # Configuration template
+├── requirements.txt
+├── .env.example
 ├── .gitignore
 ├── README.md
+├── ARCHITECTURE.md
 │
-├── src/                     # Source code
-│   ├── __init__.py
-│   ├── parsers/             # PDF parsing logic
-│   │   ├── pdf_extractor.py    # Text extraction with PyMuPDF
-│   │   ├── section_detector.py # Section identification
-│   │   ├── table_handler.py    # Table extraction with Camelot
-│   │   ├── image_handler.py    # Image extraction
-│   │   └── text_cleaner.py     # Text preprocessing
+├── src/
+│   ├── parsers/
+│   │   ├── pdf_extractor.py
+│   │   ├── section_detector.py
+│   │   ├── table_handler.py
+│   │   ├── image_handler.py
+│   │   └── text_cleaner.py
 │   │
-│   ├── storage/             # Data persistence
-│   │   ├── db_handler.py       # SQLite operations
-│   │   └── file_manager.py     # File system operations
+│   ├── storage/
+│   │   ├── db_handler.py
+│   │   └── file_manager.py
 │   │
-│   ├── utils/               # Helper functions
-│   │   ├── validators.py       # PDF and content validation
-│   │   ├── logger_config.py    # Logging setup
-│   │   └── config.py           # App configuration
+│   ├── utils/
+│   │   ├── validators.py
+│   │   ├── logger_config.py
+│   │   └── config.py
 │   │
-│   └── models/              # Data structures
-│       └── paper_model.py      # Paper data classes
+│   └── models/
+│       └── paper_model.py
 │
-├── app/                     # Streamlit UI
-│   ├── main.py             # Main application entry
+├── app/
+│   ├── main.py
 │   ├── pages/
-│   │   ├── 1_📤_Upload.py     # Upload and parse page
-│   │   └── 2_📊_Results.py    # View results page
-│   │
-│   └── components/          # Reusable UI components
-│       ├── upload_widget.py
-│       ├── section_viewer.py
-│       ├── image_gallery.py
-│       └── validation_report.py
+│   │   ├── 1_Upload.py
+│   │   └── 2_Results.py
+│   └── components/
 │
-├── data/                    # Data directory (auto-created)
-│   ├── uploads/            # Uploaded PDF files
+├── data/
+│   ├── uploads/
 │   ├── extracted/
-│   │   ├── images/         # Extracted images
-│   │   └── tables/         # Extracted tables as CSV
-│   └── paperiq.db          # SQLite database
+│   │   ├── images/
+│   │   └── tables/
+│   └── paperiq.db
 │
 └── tests/
-    └── sample_papers/      # Test PDFs for validation
+    └── sample_papers/
 ```
 
-## 🔧 Configuration
+## Configuration
 
 Configuration options in `.env`:
 
@@ -121,58 +106,36 @@ Configuration options in `.env`:
 | `MAX_PDF_SIZE_MB` | 50 | Maximum file size in MB |
 | `ENABLE_OCR` | False | Enable OCR (future feature) |
 | `MIN_SECTION_LENGTH` | 50 | Minimum section length in chars |
-| `HIGH_CONFIDENCE_THRESHOLD` | 0.8 | High confidence score threshold |
+| `HIGH_CONFIDENCE_THRESHOLD` | 0.8 | High confidence threshold |
 | `MEDIUM_CONFIDENCE_THRESHOLD` | 0.6 | Medium confidence threshold |
 
-## 📊 How It Works
-
-### Processing Pipeline
+## Processing Pipeline
 
 1. **Upload** - Validate and save PDF file
 2. **Text Extraction** - Extract text with layout info using PyMuPDF
 3. **Image Extraction** - Extract embedded images
 4. **Table Extraction** - Detect and extract tables using Camelot
-5. **Section Detection** - Identify sections using pattern matching + layout analysis
+5. **Section Detection** - Identify sections using pattern matching and layout analysis
 6. **Validation** - Generate confidence scores and quality report
 7. **Storage** - Save results to SQLite database
 
-### Section Detection
+## Technology Stack
 
-Uses a two-phase approach:
+| Component | Technology |
+|-----------|------------|
+| UI | Streamlit |
+| PDF Parsing | PyMuPDF |
+| Table Extraction | Camelot-py |
+| Image Processing | Pillow |
+| Database | SQLite |
+| Data Processing | Pandas |
 
-1. **Pattern Matching** - Regex patterns for common section headers
-2. **Layout Analysis** - Font size and bold formatting detection
-
-Combined confidence scoring:
-- **High (≥80%)**: Pattern match + large font + bold
-- **Medium (60-80%)**: Pattern match + layout feature
-- **Low (<60%)**: Weak signals
-
-## 🎨 UI Features
-
-- **Dashboard** - Overview with quick stats
-- **Upload Page** - Drag & drop PDF upload with progress tracking
-- **Results Page** - Tabbed view of sections, images, tables, and validation
-- **Confidence Badges** - Color-coded confidence indicators
-- **Export** - Download extracted tables as CSV
-
-## ⚠️ Known Limitations
+## Known Limitations
 
 - OCR not yet supported (digital PDFs only)
 - Some complex table layouts may not extract correctly
 - Multi-language support is limited
 
-## 🧪 Testing
-
-Place test PDFs in `tests/sample_papers/` directory.
-
-## 📝 License
+## License
 
 This project is for educational purposes.
-
-## 🤝 Contributing
-
-This is a Milestone 1 implementation. Future milestones will add:
-- Milestone 2: NLP analysis (summarization, keywords)
-- Milestone 3: Multi-paper comparison
-- Milestone 4: AI-powered insights

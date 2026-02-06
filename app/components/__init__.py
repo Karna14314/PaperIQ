@@ -1,6 +1,4 @@
-"""
-Reusable UI components for PaperIQ Streamlit app.
-"""
+"""Reusable UI components for PaperIQ Streamlit app."""
 
 from .upload_widget import render_upload_widget
 from .section_viewer import render_section_card
